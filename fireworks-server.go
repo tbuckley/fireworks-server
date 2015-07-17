@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/rschoen/fireworks-server/lib"
 	"net/http"
+
+	"github.com/rschoen/fireworks-server/lib"
 )
 
 func (s *Server) handler(w http.ResponseWriter, r *http.Request) {
