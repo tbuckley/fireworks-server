@@ -25,13 +25,13 @@ func EncodeGame(g Game) string {
 	return string(b)
 }
 
-func DecodeMove(s string) (Message, bool) {
+func DecodeMove(s string) (*Message, bool) {
 	b := []byte(s)
-	var m Message
+	m := new(Message)
 	err := json.Unmarshal(b, &m)
 	if err != nil {
 		fmt.Printf("Error decoding move from JSON string.\nGot message: %s\nError:%s\n\n", err, s)
-		return Message{}, false
+		return nil, false
 	}
 
 	return m, true

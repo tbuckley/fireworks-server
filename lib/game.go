@@ -24,11 +24,9 @@ type Game struct {
 	TurnsLeft     int
 }
 
-func (g *Game) Initialize() bool {
-	if g.Finished {
-		fmt.Printf("Attempting to initialize game after game has ended.")
-		return false
-	}
+func NewGame(id string) *Game {
+	g := new(Game)
+	g.GameID = id
 
 	// figure out how many cards are in the Deck
 	maxCards := 0
@@ -51,7 +49,8 @@ func (g *Game) Initialize() bool {
 	g.Players = make([]Player, 0, len(cardsInHand)-1)
 	g.Initialized = true
 	fmt.Printf("Game '%s' initialized.\n", g.GameID)
-	return true
+
+	return g
 }
 
 func (g *Game) AddPlayer(id string) bool {
@@ -110,7 +109,7 @@ func (g *Game) Start() {
 	g.Started = true
 }
 
-func (g *Game) ProcessMove(m Message) bool {
+func (g *Game) ProcessMove(m *Message) bool {
 	if !g.Started {
 		fmt.Printf("Attempting to process move for a game that hasn't Started yet.")
 		return false
